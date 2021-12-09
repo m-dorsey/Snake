@@ -1,7 +1,7 @@
 function Snake() {
 
-    this.x = 0;
-    this.y = 0;
+    this.x = offset;
+    this.y = offset;
     this.xSpeed = 1;
     this.ySpeed = 0;
     this.total = 0;
@@ -23,8 +23,8 @@ function Snake() {
         this.x += this.xSpeed*sScale;
         this.y += this.ySpeed*sScale;
 
-        this.x = constrain(this.x, 0-sScale, width);
-        this.y = constrain(this.y, 0-sScale, height);
+        this.x = constrain(this.x, offset, (gameWidth+offset)-sScale);
+        this.y = constrain(this.y, offset, (gameHeight+offset)-sScale);
 
     }
 
@@ -69,7 +69,7 @@ function Snake() {
     }
 
     this.show = function() {
-        fill(255);
+        fill(45, 200, 35);
         for (var i = 0; i < this.tail.length; i++) {
             rect(this.tail[i].x, this.tail[i].y, sScale, sScale);
         }

@@ -1,6 +1,10 @@
 
 var snake;
 var sScale = 20;
+var gameWidth = 500;
+var gameHeight = 500;
+
+var offset;
 
 var food;
 
@@ -12,6 +16,8 @@ var endBtn;
 function setup() {
 
     createCanvas(600, 600);
+    offset = (width - gameWidth)/2;
+
     snake = new Snake();
     frameRate(10);
 
@@ -22,6 +28,9 @@ function setup() {
 function draw() {
 
     background(51);
+
+    fill(255);
+    rect(offset, offset, gameWidth, gameHeight);
 
     if (snake.death()) {
         gameOver();
