@@ -75,6 +75,12 @@ function keyPressed() {
 }
 
 function gameOver() {
+
+    snake.tail = [];
+    snake.update();
+    snake.show();
+
+
     noLoop();
     console.log("GAME OVER");
 }

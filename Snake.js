@@ -23,8 +23,8 @@ function Snake() {
         this.x += this.xSpeed*sScale;
         this.y += this.ySpeed*sScale;
 
-        this.x = constrain(this.x, offset, (gameWidth+offset)-sScale);
-        this.y = constrain(this.y, offset, (gameHeight+offset)-sScale);
+        this.x = constrain(this.x, offset-sScale, (gameWidth+offset));
+        this.y = constrain(this.y, offset-sScale, (gameHeight+offset));
 
     }
 
@@ -40,10 +40,17 @@ function Snake() {
             }
         }
 
-        if (this.x > width-sScale || this.x < 0) {
+        if (this.x >= gameWidth+offset || this.x < offset) {
+            console.log("game width over");
+            this.setPosition(this.x-sScale, this.y);
+            this.showPostDeathPos();
+
+
             return true;
         }
-        if (this.y > height-sScale || this.y < 0) {
+        if (this.y >= gameHeight+offset || this.y < offset) {
+            console.log("game height over");
+
             return true;
         }
         //console.log(this.x);
@@ -58,8 +65,8 @@ function Snake() {
     }
 
     this.eat = function(food) {
-        var d = dist(this.x, this.y, food.x*sScale, food.y*sScale);
-        if (d < 2) {
+        var d = dist(this.x, this.y, (food.x*sScale)+offset, (food.y*sScale)+offset);
+        if (d < 1) {
             this.total++;
             // console.log(this.total);
             return true;
@@ -82,6 +89,11 @@ function Snake() {
 
 
 
+    }
+
+    this.showPostDeathPos = function() {
+        fill(45, 200, 35);
+        rect(this.x, this.y, sScale, sScale);
     }
 
     this.dir = function(x, y, direction) {
